@@ -1,0 +1,17 @@
+{
+    "graph_folder":             "./datasets/",
+    "dataset":                  "IMDBMulti",
+    "model":                    "BMao", 
+    "normalization":            "linear",
+    "epochs":                   200,
+    "batch_size":               128,
+    "batch_type":               "oneone",
+    "early_stopping":           5,
+    "train":                    false,
+    "val_ratio":                0.1,
+    "num_test":                 1,
+    "threshold":                50,
+    "BMao_k":                   30,
+    "device":                   "cuda",
+    "precision_type":           "raw"
+}
