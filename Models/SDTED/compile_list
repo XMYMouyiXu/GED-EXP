@@ -1,4 +1,0 @@
-javac -d bin/ -cp "lib/*:bin/" src/ged/app/*.java
-
-java -Djava.library.path=./lib/ -cp "lib/*:bin/" ged.app.GEDExperiments
-
