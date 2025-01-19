@@ -1,0 +1,7 @@
+{
+    "dataset":          "GED_IMDBMulti",
+    "model":            "origin",
+    "normalization":    "none",
+    "num_model":        2,
+    "test_type":        "traintest"
+}

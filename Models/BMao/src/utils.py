@@ -45,7 +45,7 @@ def _calculate_prec_at_k(k, target):
     return best_k_target
 
 
-def calculate_prec_at_k(k, prediction, target, target_ged, normalization, type="normalized"):
+def calculate_prec_at_k(k, prediction, target, target_ged, normalization="exp", type="normalized"):
     """
     Calculating precision at k.
     """
