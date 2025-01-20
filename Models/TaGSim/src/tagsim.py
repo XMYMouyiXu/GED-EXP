@@ -119,7 +119,7 @@ class TaGSimTrainer(object):
         self.training_graphs = load_graphs(self.args.dataset, train_or_test='train')
         self.testing_graphs = load_graphs(self.args.dataset, train_or_test='test')
 
-        g = open('./dataset/' + self.args.dataset + '/global_labels', 'rb')
+        g = open('../../datasets/TAGSimdatasets/' + self.args.dataset + '/global_labels', 'rb')
         self.global_labels = pickle.load(g)
         g.close()
 

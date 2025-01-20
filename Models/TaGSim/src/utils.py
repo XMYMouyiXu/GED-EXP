@@ -64,7 +64,7 @@ def sorted_nicely(l):
 
 def load_gexf_file(dataset_name, train_or_test='train', node_featue_name='type'):
     graphs = []
-    dir = './dataset/' + dataset_name + '/' + train_or_test
+    dir = '../../datasets/TAGSimdatasets/' + dataset_name + '/' + train_or_test
 
     for file in sorted_nicely(glob(dir + '/*.gexf')):
         gid = int(basename(file).split('.')[0])
@@ -74,7 +74,7 @@ def load_gexf_file(dataset_name, train_or_test='train', node_featue_name='type')
         if not nx.is_connected(g):
             raise RuntimeError('{} not connected'.format(gid))
 
-    for file in sorted_nicely(glob('./dataset/' + dataset_name + '/' + 'test' + '/*.gexf')):
+    for file in sorted_nicely(glob('../../datasets/TAGSimdatasets/' + dataset_name + '/' + 'test' + '/*.gexf')):
         gid = int(basename(file).split('.')[0])
         g = nx.read_gexf(file)
         g.graph['gid'] = gid
@@ -88,7 +88,7 @@ def load_gexf_file(dataset_name, train_or_test='train', node_featue_name='type')
 
 def load_graphs(dataset_name, train_or_test='train'):
     graphs = []
-    dir = './dataset/' + dataset_name + '/' + train_or_test
+    dir = '../../datasets/TAGSimdatasets/' + dataset_name + '/' + train_or_test
     for file in sorted_nicely(glob(dir + '/*.gexf')):
         gid = int(basename(file).split('.')[0])
         g = nx.read_gexf(file)
@@ -100,7 +100,7 @@ def load_graphs(dataset_name, train_or_test='train'):
 
 def load_generated_graphs(dataset_name, file_name='generated_graph_500'):
 
-    dir = './dataset/' + dataset_name + '/' + file_name
+    dir = '../../datasets/TAGSimdatasets/' + dataset_name + '/' + file_name
     g = open(dir, 'rb')
     generated_graphs = pickle.load(g)
     g.close()
