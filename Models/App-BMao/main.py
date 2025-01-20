@@ -1,7 +1,6 @@
 from src.train import Trainer
 from src.utils import get_hyper
 import torch
-import numpy as np
 
 def main():
     args = get_hyper("./hyperparameters.json")

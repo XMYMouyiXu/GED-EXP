@@ -22,7 +22,7 @@ from src.utils import get_hyper, calculate_ranking_correlation, calculate_prec_a
 
 class Trainer():
 
-    def __init__(self, args, filename_best_model):
+    def __init__(self, args):
         random.seed(1)
         self.args = args
         self.filename = args["graph_folder"] + args["dataset"] + "/"
