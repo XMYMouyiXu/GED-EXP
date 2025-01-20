@@ -10,7 +10,7 @@ def main():
     for i in range(10):
         args.idx = i
         trainer = EGSCTrainer(args)
-        
+
         count = 0
         for g in trainer.testing_graphs:
             for g1 in trainer.training_graphs:

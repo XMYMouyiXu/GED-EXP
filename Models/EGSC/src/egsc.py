@@ -79,7 +79,7 @@ class EGSCTrainer(object):
         """
         print("\nPreparing dataset.\n")
 
-        self.args.data_dir = '../datasets'
+        self.args.data_dir = '../../datasets/pygdatasets/'
 
         if self.args.dataset == "new_IMDB":
             self.training_graphs = GEDDataset(self.args.data_dir, "IMDBMulti", train=True) 
@@ -87,9 +87,7 @@ class EGSCTrainer(object):
         else:
             self.training_graphs = GEDDataset(self.args.data_dir, self.args.dataset, train=True) 
             self.testing_graphs = GEDDataset(self.args.data_dir, self.args.dataset, train=False) 
-        if self.args.dataset=="ALKANE":
-            self.testing_graphs = GEDDataset(self.args.data_dir+'/{}'.format(self.args.dataset), self.args.dataset, train=True) 
-        
+
         # self.testing_graphs.norm_ged
         self.nged_matrix = self.training_graphs.norm_ged
         self.ged_matrix = self.training_graphs.ged
@@ -97,7 +95,7 @@ class EGSCTrainer(object):
         # print(list(self.nged_matrix[0][:20]))
         
         if self.args.dataset == "new_IMDB":
-            with open("./IMDB_bmao", "r") as f:
+            with open("../../../datasets/datasets/IMDBMulti/ged", "r") as f:
                 test_scores = [list(map(int, line.strip().split())) for line in f.readlines()]
             self.ged_matrix = torch.tensor(test_scores)
             
@@ -124,8 +122,8 @@ class EGSCTrainer(object):
         # print(list(self.nged_matrix[0][:20]))
         # exit()
         
-        if os.path.exists("./test_ged_{}".format(self.args.dataset)):
-            with open("./test_ged_{}".format(self.args.dataset), "r") as f:
+        if os.path.exists("../../../datasets/datasets/{}/test_ged".format(self.args.dataset)):
+            with open("../../../datasets/datasets/{}/test_ged".format(self.args.dataset), "r") as f:
                 test_scores = [list(map(int, line.strip().split())) for line in f.readlines()]
 
 
