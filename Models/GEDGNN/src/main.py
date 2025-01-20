@@ -39,6 +39,7 @@ def main():
         args.idx = i
         print("=========================================")
         trainer = Trainer(args)
+
         if args.model_epoch_start > 0:
             trainer.load(args.model_epoch_start)
 

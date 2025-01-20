@@ -120,7 +120,7 @@ def parameter_parser():
 
     parser.add_argument("--abs-path",
                         type=str,
-                        default="",
+                        default="../../datasets/GEDGNN_dataset/",
                         # default='/apdcephfs/private_czpiao/workplace/gedgnn/',
                         help="the absolute path")
 
