@@ -84,15 +84,17 @@ args = get_hyper("./hyperparameters.json")
 CUDA_INDEX = 0
 NAME = args["dataset"]
 
+dataset_root = "../../datasets/"
+
 if NAME == "GED_AIDS700nef":
     CLASSES = 29
-    root = "datasets/AIDS700nef/"
+    root = dataset_root + "datasets/AIDS700nef/"
 elif NAME == "GED_LINUX":
     CLASSES = 1
-    root = "datasets/LINUX/"
+    root = dataset_root + "datasets/LINUX/"
 elif NAME == "GED_IMDBMulti":
     CLASSES = 1
-    root = "datasets/IMDBMulti/"
+    root = dataset_root + "datasets/IMDBMulti/"
 else:
     raise TypeError("Invalid Dataset")
 

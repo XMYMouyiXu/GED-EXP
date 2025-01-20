@@ -68,7 +68,9 @@ We recommend using a `conda` environment for installation.
 
 ## Usage
 
-Check out the experiment notebooks at [greed-expts](https://github.com/rishabh-ranjan/greed-expts) for example usage. The notebooks contain code for training, testing, visualization, etc.
+Modify `hyperparameters.json` to change the hyperparameters.
+Run `python main.py` to train the model, the models will be saved in `results/`.
+Run `python test.py` to test the model.
 
 ## Contact
 
@@ -87,11 +89,3 @@ If you face any difficulties in using this repo feel free to raise a GitHub issu
 }
 ```
 
-
-
-pytorch                   1.13.1          py3.10_cuda11.7_cudnn8.5.0_0    pytorch
-pytorch-cluster           1.6.0           py310_torch_1.13.0_cu117    pyg
-pytorch-cuda              11.7                 h67b0de4_1    pytorch
-pytorch-mutex             1.0                        cuda    pytorch
-pytorch-scatter           2.1.0           py310_torch_1.13.0_cu117    pyg
-pytorch-sparse            0.6.16          py310_torch_1.13.0_cu117    pyg

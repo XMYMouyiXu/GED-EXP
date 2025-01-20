@@ -54,64 +54,6 @@ torch.backends.cudnn.benchmark = True
 split_line = lambda x: list(map(lambda y: int(y.strip()), x.split()))
 
 
-# def read_file(filename):
-#     fea = []
-#     edge_index = [[], []]
-#     with open(filename, "r") as f:
-#         n, m, features = split_line(f.readline())
-#         num_features = features
-#         fea = [[] for _ in range(n)]
-#         for _ in range(n):
-#             x, y = split_line(f.readline())
-#             temp_y = [0.0] * num_features
-#             if num_features == 1:
-#                 temp_y = [1.0]
-#             else:
-#                 temp_y[y] = 1.0
-#             fea[x] = temp_y
-#         for _ in range(m):
-#             x, y = split_line(f.readline())
-#             edge_index[0].append(x)
-#             edge_index[1].append(y)
-#     fea = torch.Tensor(fea)
-#     edge_index = torch.LongTensor(edge_index)
-#     graph = Data(x=fea, edge_index=edge_index, num_nodes=n)
-
-#     return graph
-
-# def get_dataset(train):
-#     print("Reading {} graphs...".format("train" if train else "test"))
-#     folder_name = "train/" if train else "test/"
-#     num_graphs = 0 if train else num_train_graphs
-#     graphs = []
-#     for i in range(len(os.listdir(root + folder_name))):
-#         filename = str(i)
-#         temp_graph = read_file(root + folder_name + filename)
-#         temp_graph.i = num_graphs
-#         graphs.append(temp_graph)
-#         num_graphs += 1
-
-#     num_graphs -= 0 if train else num_train_graphs
-#     return graphs, num_graphs
-
-# def split_train_val():
-#     all = copy.deepcopy(train_set)
-#     random.shuffle(all)
-#     training_graph = all[:int(num_train_graphs * (1 - val_ratio))]
-#     val_graph = all[int(num_train_graphs * (1 - val_ratio)):]
-#     # self.training_graph = all[:self.num_train_graphs - self.num_test_graphs]
-#     # self.val_graph = all[self.num_train_graphs - self.num_test_graphs:]
-#     num_train_set = len(training_graph)
-#     num_val_set = len(val_graph)
-#     return training_graph, val_graph, num_train_set, num_val_set
-
-# num_train_graphs = 0
-# num_features = 1
-# train_set, num_train_graphs = get_dataset(True)
-# test_set, num_test_set = get_dataset(False)
-
-# train_set, val_set, num_train_set, num_val_set = split_train_val() 
-
 def transfer_data_object(temp_set):
     for i in range(len(temp_set[0])):
         temp_set[0][i] = Data.from_dict(temp_set[0][i].__dict__)
@@ -122,7 +64,7 @@ def transfer_data_object(temp_set):
     return temp_set
 
 
-train_set, train_meta = torch.load(f'./greed-expts/data/{NAME}/train.pt', map_location='cpu')
+train_set, train_meta = torch.load(f'../../datasets/GREEDDataset/{NAME}/train.pt', map_location='cpu')
 train_set = transfer_data_object(train_set)
 
 print(len(train_set))
