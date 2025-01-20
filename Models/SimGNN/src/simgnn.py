@@ -174,7 +174,7 @@ class SimGNNTrainer(object):
         
     def generate_graph_pairs(self):
         from torch_geometric.datasets import GEDDataset
-        file_path = "./datasets/"
+        file_path = "../../datasets/pygdatasets/"
         
         if self.args.dataset == "new_IMDB":
             self.training_set = GEDDataset(file_path, "IMDBMulti", train=True) 
@@ -188,31 +188,13 @@ class SimGNNTrainer(object):
         
         
         if self.args.dataset == "new_IMDB":
-            with open("./IMDB_bmao".format(self.args.dataset), "r") as f:
+            with open("../../datasets/datasets/IMDBMulti/ged", "r") as f:
                 test_scores = [list(map(int, line.strip().split())) for line in f.readlines()]
             self.ged = torch.tensor(test_scores)
             
-            # num_graphs = len(self.training_graphs) + len(self.testing_graphs)
-            # all_graphs = self.training_graphs + self.testing_graphs
-            # for i in range(num_graphs):
-            #     for j in range(i, num_graphs):
-            #         g1 = all_graphs[i]
-            #         g2 = all_graphs[j]
-            #         if test_scores[g1["i"]][g2["i"]]:
-            #             self.nged_matrix[g1["i"], g2["i"]] = torch.tensor(-1.0)
-            #             self.nged_matrix[g2["i"], g1["i"]] = torch.tensor(-1.0)
-            #         # self.ged_matrix[g1["i"], g2["i"]] = test_scores[g1["i"]][g2["i"]]
-            #         # self.ged_matrix[g2["i"], g1["i"]] = test_scores[g1["i"]][g2["i"]]
 
-            #         temp = g1.num_nodes + g2.num_nodes
-                    
-            #         self.nged_matrix[g1["i"], g2["i"]] = 2 * test_scores[g1["i"]][g2["i"]] / temp
-            #         self.nged_matrix[g2["i"], g1["i"]] = 2 * test_scores[g1["i"]][g2["i"]] / temp
-
-           
-
-        if os.path.exists("./test_ged_{}".format(self.args.dataset)):
-            with open("./test_ged_{}".format(self.args.dataset), "r") as f:
+        if os.path.exists("../../datasets/datasets/{}/test_ged".format(self.args.dataset)):
+            with open("../../datasets/datasets/{}/test_ged".format(self.args.dataset), "r") as f:
                 test_scores = [list(map(int, line.strip().split())) for line in f.readlines()]
 
 

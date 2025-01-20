@@ -12,9 +12,10 @@ def main():
     args = parameter_parser()
     tab_printer(args)
     trainer = SimGNNTrainer(args)
-    args.training_graphs = "./dataset/{}".format(args.dataset)
-    args.testing_graphs = "./dataset/{}/test".format(args.dataset)
-    args.save_path = "./saved_models/2_{}".format(args.dataset)
+    args.training_graphs = "../../datasets/dataset/{}".format(args.dataset)
+    args.testing_graphs = "../../datasets/dataset/{}/test".format(args.dataset)
+    args.save_path = "./saved_models/0_{}".format(args.dataset)
+
     
     if args.load_path:
         trainer.load()
