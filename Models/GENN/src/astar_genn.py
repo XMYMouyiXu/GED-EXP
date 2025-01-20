@@ -605,24 +605,24 @@ class GENNTrainer(object):
         
         
         if self.args.dataset == "new_IMDB":
-            ori_train = GEDDataset('datasets/'.format("IMDBMulti"), "IMDBMulti", train=True)
+            ori_train = GEDDataset('../../datasets/pygdatasets/', "IMDBMulti", train=True)
             self.training_graphs = ori_train[:len(ori_train) // 4 * 3]
             self.val_graphs = ori_train[len(ori_train) // 4 * 3:]
-            self.testing_graphs = GEDDataset('datasets/'.format("IMDBMulti"), "IMDBMulti", train=False)
+            self.testing_graphs = GEDDataset('../../datasets/pygdatasets/'.format("IMDBMulti"), "IMDBMulti", train=False)
 
 
         elif self.args.dataset in ['AIDS700nef', 'LINUX', "IMDBMulti"]: # torch_geometric datasets
 
-            ori_train = GEDDataset('datasets/'.format(self.args.dataset), self.args.dataset, train=True)
+            ori_train = GEDDataset('../../datasets/pygdatasets/', self.args.dataset, train=True)
             self.training_graphs = ori_train[:len(ori_train) // 4 * 3]
             self.val_graphs = ori_train[len(ori_train) // 4 * 3:]
-            self.testing_graphs = GEDDataset('datasets/'.format(self.args.dataset), self.args.dataset, train=False)
-        elif self.args.dataset in ['Willow']: # Willow object class dataset
-            from src.willow_obj_data import GEDDataset
-            all_graphs = GEDDataset('datasets/{}'.format(self.args.dataset), self.args.dataset)
-            self.training_graphs = all_graphs[:len(all_graphs)//5*3]
-            self.val_graphs = all_graphs[len(all_graphs)//5*3:len(all_graphs)//5*4]
-            self.testing_graphs = all_graphs[len(all_graphs)//5*4:]
+            self.testing_graphs = GEDDataset('../../datasets/pygdatasets/', self.args.dataset, train=False)
+        # elif self.args.dataset in ['Willow']: # Willow object class dataset
+        #     from src.willow_obj_data import GEDDataset
+        #     all_graphs = GEDDataset('../../datasets/pygdatasets/'.format(self.args.dataset), self.args.dataset)
+        #     self.training_graphs = all_graphs[:len(all_graphs)//5*3]
+        #     self.val_graphs = all_graphs[len(all_graphs)//5*3:len(all_graphs)//5*4]
+        #     self.testing_graphs = all_graphs[len(all_graphs)//5*4:]
         else:
             raise ValueError('Unknown dataset name {}'.format(self.args.dataset))
 
@@ -631,7 +631,7 @@ class GENNTrainer(object):
         
         
         if self.args.dataset == "new_IMDB":
-            with open("./IMDB_bmao", "r") as f:
+            with open("../../datasets/datasets/IMDBMulti/ged", "r") as f:
                 test_scores = [list(map(int, line.strip().split())) for line in f.readlines()]
             self.ged_matrix = torch.tensor(test_scores)
             
@@ -658,8 +658,8 @@ class GENNTrainer(object):
         
         
 
-        if os.path.exists("./test_ged_{}".format(self.args.dataset)):
-            with open("./test_ged_{}".format(self.args.dataset), "r") as f:
+        if os.path.exists("../../datasets/datasets/{}/test_ged".format(self.args.dataset)):
+            with open("../../datasets/datasets/{}/test_ged".format(self.args.dataset), "r") as f:
                 test_scores = [list(map(int, line.strip().split())) for line in f.readlines()]
 
 
