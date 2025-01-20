@@ -47,3 +47,7 @@ v [vertex_id] [vertex_label]
 e [vertex_id1] [vertex_id2] [edge_label]
 
 [graph_q.txt](datasets/graph_q.txt) and [graph_g.txt](datasets/graph_g.txt) are two example data files. Note that, vertex_id must be consecutive numbers starting from 0.
+
+## To run our test
+Simply run `python run.py`
+To modify the dataset, modify the dataset variable in `run.py`.

@@ -6,7 +6,9 @@ Graph edit distance (GED) is an important metric for measuring the distance or s
 The datasets can be downloaded [here](https://drive.google.com/file/d/1Dwtki6O6T6KgfIXXdcIiqisCxl_nEJFD/view?usp=sharing). It includes datasets for our APP-BMao, datasets for GEDGNN, datasets from pyg and datasets for SDTED.
 After downloaded, extract it in the main directory.
 
-In GENN, when parsing the dataset argument, for IMDBMulti dataset, "new_IMDB" refers to IMDB dataset with our generated ged values. "IMDBMulti" refers to the IMDB dataset from PyG.
+In `simGNN`, `GENN` and `EGSC`, when parsing the dataset argument, for IMDBMulti dataset, `new_IMDB` refers to IMDB dataset with our generated ged values. `IMDBMulti` refers to the IMDB dataset from PyG.
+
+In GREED, the dataset names are `GED_AIDS700nef`, `GED_LINUX` and `GED_IMDBMulti`.
 
 ## How to run
 Please refer to the README file in each model directory.
