@@ -361,5 +361,5 @@ def test(test_type="traintest"):
     print(test_time)
 
 test("traintest")
-if DATASET != "pyg_IMDB":
+if ged_flag:
     test("testtest")
