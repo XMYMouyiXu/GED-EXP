@@ -92,7 +92,7 @@ if NAME == "GED_AIDS700nef":
 elif NAME == "GED_LINUX":
     CLASSES = 1
     root = dataset_root + "datasets/LINUX/"
-elif NAME == "GED_IMDBMulti":
+elif NAME == "GED_IMDBMulti" or NAME == "pyg_IMDB":
     CLASSES = 1
     root = dataset_root + "datasets/IMDBMulti/"
 else:
@@ -163,7 +163,7 @@ def get_sim_score(training_graph, testing_graph, num_train_graphs, num_test_grap
     num_graphs = num_train_graphs + num_test_graphs
     sim_score = [[0.0] * num_graphs for _ in range(num_graphs)]
     ged = [[0.0] * num_graphs for _ in range(num_graphs)]
-    with open(filename + "ged", "r") as f:
+    with open(filename + "ged_pyg" if NAME == "pyg_IMDB" else "ged", "r") as f:
         all_scores = f.readlines()
 
     num_n = []
