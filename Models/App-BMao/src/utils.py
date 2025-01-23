@@ -66,4 +66,4 @@ def calculate_prec_at_k(k, prediction, target, target_ged, normalization="exp", 
     # print(set(best_k_pred))
     # print(set(best_k_pred).intersection(set(best_k_target_ged)))
     
-    return len(set(best_k_pred).intersection(set(best_k_target_ged))) / k
+    return len(set(best_k_pred).intersection(set(best_k_target))) / k

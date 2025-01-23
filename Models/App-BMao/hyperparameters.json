@@ -1,5 +1,5 @@
 {
     "graph_folder":             "../../datasets/datasets/",
-    "dataset":                  "AIDS700nef",
+    "dataset":                  "pyg_IMDB",
     "BMao_k":                   30
 }

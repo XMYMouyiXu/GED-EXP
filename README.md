@@ -10,7 +10,7 @@ In `simGNN`, `GENN` and `EGSC`, when parsing the dataset argument, for IMDBMulti
 
 In GREED, the dataset names are `GED_AIDS700nef`, `GED_LINUX` and `GED_IMDBMulti`.
 
-For GREED and ERIC, change the dataset name to `ptg_IMDB` for IMDBpyg dataset.
+For GREED, ERIC, APP-BMAO and DFS-BMAO, change the dataset name to `pyg_IMDB` for IMDBpyg dataset.
 
 ## How to run
 Please refer to the README file in each model directory.

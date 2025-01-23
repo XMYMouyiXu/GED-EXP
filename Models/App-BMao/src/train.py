@@ -25,6 +25,14 @@ class Trainer():
     def __init__(self, args):
         random.seed(1)
         self.args = args
+        if self.args["dataset"] in ["AIDS700nef", "LINUX", "IMDBMulti"]:
+            self.ged_flag = True
+        elif self.args["dataset"] in ["pyg_IMDB"]:
+            self.ged_flag = False
+            self.args["dataset"] = "IMDBMulti"
+        else:
+            raise TypeError("Invalid Dataset Name!")
+        
         self.filename = args["graph_folder"] + args["dataset"] + "/"
         self.num_graphs = 0
         self.graphs = []
@@ -82,7 +90,7 @@ class Trainer():
         sim_score_exp = [[0.0] * num_graphs for _ in range(num_graphs)]
         sim_score_linear = [[0.0] * num_graphs for _ in range(num_graphs)]
         ged = [[0.0] * num_graphs for _ in range(num_graphs)]
-        with open(self.filename + "ged", "r") as f:
+        with open(self.filename + ("ged" if self.ged_flag else "ged_pyg") , "r") as f:
             all_scores = f.readlines()
 
         num_n = []
@@ -152,7 +160,9 @@ class Trainer():
         model_path = "./"
         source_graph_path = model_path + "source_graph.txt"
         target_graph_path = model_path + "target_graph.txt"
-        result_path = model_path + "result_" + self.args["dataset"]
+        result_path = model_path + "result_" + self.args["dataset"] + ("" if self.ged_flag else "_pyg") \
+                    + "_" + type + "_" + str(self.args["BMao_k"])
+                    
         num_all = self.num_train_graphs
         # print(num_all)
         if type == "traintest":
@@ -171,30 +181,37 @@ class Trainer():
         scores_exp = []
         scores_linear = []
         mae = []
-
+        total_time = 0
+        
         print("Creating Files...")
-        source_graph_f = open(source_graph_path, "w")
-        target_graph_f = open(target_graph_path, "w")
 
+        f = open(result_path, "w")
+        f.close()
+        
+        print("Running BMao...")
         for graph1 in self.testing_graph:
+            source_graph_f = open(source_graph_path, "w")
+            target_graph_f = open(target_graph_path, "w")
             self.write_graph(source_graph_f, graph1)
         
-        for graph2 in graph_sets:
-            self.write_graph(target_graph_f, graph2)
+            for graph2 in graph_sets:
+                if self.ged_matrix[graph1.i][graph2.i] < 0:
+                    continue
+                self.write_graph(target_graph_f, graph2)
 
-        source_graph_f.close()
-        target_graph_f.close()
+            source_graph_f.close()
+            target_graph_f.close()
 
-        start_time = time.time()
-        print("Running BMao...")
-        os.system("{}ged -d {} -q {} -m search -p astar -l BMao -g -k {} > {}result_{}".format(model_path,
-                                                                                               source_graph_path, 
-                                                                                               target_graph_path,
-                                                                                               self.args["BMao_k"],
-                                                                                               model_path,
-                                                                                               self.args["dataset"]))
-        
-        end_time = time.time()
+            start_time = time.time()
+            os.system("{}ged -d {} -q {} -m search -p astar -l BMao -g -k {} >> {}".format(model_path,
+                                                                                        source_graph_path, 
+                                                                                        target_graph_path,
+                                                                                        self.args["BMao_k"],
+                                                                                        result_path))
+            
+            end_time = time.time()
+            total_time += end_time - start_time
+
         
         print("Analyzing results...")
         result_f = open(result_path, "r")
@@ -254,7 +271,7 @@ class Trainer():
         result_f.close()
         
         # print(prediction_ged_list)
-        # print(prediction_list)
+        # print(prediction_list_exp)
         # print()
 
         for i in range(self.num_test_graphs):
@@ -292,7 +309,7 @@ class Trainer():
             self.train_mse_exp = np.mean(scores_exp).item()
             self.train_mse_linear = np.mean(scores_linear).item()
             self.train_model_mae = np.mean(mae).item()
-            self.train_test_time = end_time - start_time
+            self.train_test_time = total_time
         else:
             self.test_rho = np.mean(rho_list).item()
             self.test_tau = np.mean(tau_list).item()
@@ -301,10 +318,11 @@ class Trainer():
             self.test_mse_exp = np.mean(scores_exp).item()
             self.test_mse_linear = np.mean(scores_linear).item()
             self.test_model_mae = np.mean(mae).item()
-            self.test_test_time = end_time - start_time
+            self.test_test_time = total_time
 
     def test(self):
         self.test_BMao("traintest")
-        self.test_BMao("testtest")
+        if self.ged_flag:
+            self.test_BMao("testtest")
             
    

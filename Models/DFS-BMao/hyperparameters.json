@@ -1,0 +1,5 @@
+{
+    "graph_folder":             "../../datasets/datasets/",
+    "dataset":                  "pyg_IMDB",
+    "BMao_k":                   200
+}

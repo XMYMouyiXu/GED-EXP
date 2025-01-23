@@ -791,7 +791,7 @@ void Application::generate_best_extension(State *parent, State *now) {
 	if(visited_siblings_n != NULL) visited_siblings_n[now->level] = 0;
 	if(children == NULL) children = new pair<int,int>[g_n];
 
-	cout << candidates_n << endl;
+	// cout << candidates_n << endl;
 
 	if(lb_method == LSa) compute_best_extension_LSa(now, candidates_n, candidates, pre_siblings);
 	else if(lb_method == BMao) compute_best_extension_BM(1, now, candidates_n, candidates, pre_siblings, 0);
@@ -1065,7 +1065,7 @@ void Application::compute_best_extension_BM(char anchor_aware, State *now, ui n,
 		}
 		for(ui j = q_starts[u];j < q_starts[u+1];j ++) elabels_map[q_elabels[j]] = 0;
 
-		for (ui j = 0; j < n; j ++) cout << i << " " << j << " " << cost[i * n + j] << endl;
+		// for (ui j = 0; j < n; j ++) cout << i << " " << j << " " << cost[i * n + j] << endl;
 	}
 	for(State *parent = now->parent;parent != NULL;parent = parent->parent) visY[parent->image] = 0;
 	for(ui i = 0;i < now->level;i ++) visX[MO[i]] = 0;
